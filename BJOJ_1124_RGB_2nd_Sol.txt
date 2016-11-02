@@ -1,0 +1,58 @@
+/*
+ *  최초 Solution. (2016-11-01)
+ *  문제점 : 입력과 함수호출에서 뭔가 혼란이 발생했다.
+ *  해결책 : 그냥 입력값을 2차원 배열에 저장하고, 이상태에서 탐색해본다.
+ *  
+ *  Step 1. 입력값을 2차원 배열에 저장한다.
+ *  Step 2. i=0일때, R(0,1) G(0,2) B(0,3) 이므로, i=1일때 부터는 이전 j를 고려하여 탐색한다.
+ *  Step 3. 이전 j값을 변수 prev_j에 저장하여 비교한다.
+ *  Step 4. if(j==prev_j) -> continue; else min(one, two);
+ *  Step 5. 3중 for문이 될 것 같은데.. time limit에 걸리지 싶다.
+ *  Step 6. 일단 생각해 본 뒤 구현해보자.
+ */
+
+
+
+import java.util.Scanner;
+
+ 
+public class Main {
+
+	static int rgb[];
+	static int minimum = 0, indexOfRgb=0;
+	static int next_fst=0, next_snd=0;
+	
+	public static void main(String args[]){
+		Scanner scan = new Scanner(System.in);
+		
+		int T = scan.nextInt();
+		int red, green, blue;
+		int result=0;
+		
+		rgb = new int[3*2*T];
+		
+		for(int i=0; i<T; i++){
+			red = scan.nextInt();
+			green = scan.nextInt();
+			blue = scan.nextInt();
+			
+			if(i==0){
+				caseTest(red);
+				caseTest(green);
+				caseTest(blue);
+			}
+				
+		}
+		
+		System.out.println(result);
+		
+	}
+	
+	public static int caseTest(int a){
+		
+	}
+	
+	public static int min(int first, int second){
+		
+	}
+}

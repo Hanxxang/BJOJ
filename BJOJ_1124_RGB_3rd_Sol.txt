@@ -1,0 +1,94 @@
+/*
+ *  최초 Solution. (2016-11-02)
+ *  문제점 : 예제 Test Case와 1 2 3 / 4 100 200 / 5 6 7 Test Case는 값이 잘 나온다.
+ *  해결책 : 어떤 Test Case일 때 출력이 틀릴지 생각해본다.
+ *  .....문제점 발견
+ *  1 10 100
+ *  100 5 50
+ *  100 20 100
+ *  의 Case를 생각해보자.
+ *  실제 답은 1, 50, 20 = 71 이지만,
+ *  현재 알고리즘으로는 10, 50, 20 = 80 으로 나타난다.
+ *  Why? min() method 때문이다.
+ *  
+ *  해결책 : 아예 두 수 비교가 아닌 전체 case를 다 검사해야 하는 것 같다.
+ */
+
+
+
+import java.util.Scanner;
+
+public class Main {
+
+	static int rgb[][];
+	static int next_fst=-1, next_snd=-1; // R=0, G=1, B=2
+	static int before_j=-1;
+	
+	public static void main(String args[]){
+		Scanner scan = new Scanner(System.in);
+		
+		int T = scan.nextInt();
+		long result=0;
+		long minimum=0;
+		
+		rgb = new int[T][3];
+		
+		for(int i=0; i<T; i++){
+			rgb[i][0] = scan.nextInt();
+			rgb[i][1] = scan.nextInt();
+			rgb[i][2] = scan.nextInt();
+		}
+		
+		for(int k=0; k<3; k++){
+			result=0;
+			next_fst=-1;
+			next_snd=-1;
+		for(int i=0; i<T; i++){
+			if(next_fst!=-1 || next_snd!=-1)
+				result += min(rgb[i][next_fst], rgb[i][next_snd]);
+			
+			if(i==0){
+				if(k==0){
+					next_fst = 1;
+					next_snd = 2;
+				} else if(k==1){
+					next_fst = 0;
+					next_snd = 2;
+				} else{
+					next_fst = 0;
+					next_snd = 1;
+				}
+				result+=rgb[i][k];
+			} else{
+				if(before_j==0){
+					next_fst = 1;
+					next_snd = 2;
+				} else if(before_j==1){
+					next_fst = 0;
+					next_snd = 2;
+				} else{
+					next_fst = 0;
+					next_snd = 1;
+				}
+				
+			}
+				
+		}
+		if(k==0) minimum=result;
+		if(minimum>result) minimum=result;
+		}
+		
+		System.out.println(minimum);
+		
+	}
+	
+	public static int min(int first, int second){
+		if(first<=second){
+			before_j = next_fst;
+			return first;
+		} else {
+			before_j = next_snd;
+			return second;
+		}
+	}
+}
