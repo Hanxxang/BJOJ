@@ -1,34 +1,40 @@
 /*
- *  ÃÖÃÊ Solution. (2016-11-08)
- *  ¹®Á¦Á¡ : ¾Ë°í¸®ÁòÀº dp¸¦ ½á¾ßµÇ´Âµ¥ ¾î¶»°Ô Á¢¸ñÇØ¾ß ÇÒ Áö °¨ÀÌ ¾ÈÀâÈù´Ù.
- *  ÇØ°áÃ¥ : °ø½Ä À¯µµ¸¦ ÇØº¸·Á Çß´Âµ¥ µµÀúÈ÷ ÇØ°áÀÌ µÇÁö ¾Ê´Â´Ù.
- *         ÀÌ ¹®Á¦´Â ¿¬»ê'È½¼ö'ÀÇ ÃÖ¼Ò°ªÀ» ±¸ÇÏ´Â ¹®Á¦ÀÌ´Ù.
- *         ´ëºÎºĞ 'È½¼ö'¸¦ ±¸ÇÏ´Â ¹®Á¦´Â Á¤È®ÇÑ Solutionº¸´Ù´Â
- *         ÀÌ¸¦ CountÇÒ ¼ö ÀÖ´Â ²Ä¼ö(?)·Î Ç®¸®´Â °æ¿ì°¡ ¸¹´Ù.
- *         ¹®Á¦ ÀÚÃ¼¿Í °è»ê½ÄÀÇ ¼ø¼­¸¦ °í·ÁÇØ count È½¼ö¸¸
- *         Ã¼Å©ÇÏ´Â ¹æ¹ıÀ» Ã£¾Æ³»´Â °ÍÀÌ Áß¿äÇÑ µí ÇÏ´Ù.
+ *  ìµœì´ˆ Solution. (2016-11-08)
+ *  ë¬¸ì œì  : ì•Œê³ ë¦¬ì¦˜ì€ dpë¥¼ ì¨ì•¼ë˜ëŠ”ë° ì–´ë–»ê²Œ ì ‘ëª©í•´ì•¼ í•  ì§€ ê°ì´ ì•ˆì¡íŒë‹¤.
+ *  í•´ê²°ì±… : ê³µì‹ ìœ ë„ë¥¼ í•´ë³´ë ¤ í–ˆëŠ”ë° ë„ì €íˆ í•´ê²°ì´ ë˜ì§€ ì•ŠëŠ”ë‹¤.
+ *         ì´ ë¬¸ì œëŠ” ì—°ì‚°'íšŸìˆ˜'ì˜ ìµœì†Œê°’ì„ êµ¬í•˜ëŠ” ë¬¸ì œì´ë‹¤.
+ *         ëŒ€ë¶€ë¶„ 'íšŸìˆ˜'ë¥¼ êµ¬í•˜ëŠ” ë¬¸ì œëŠ” ì •í™•í•œ Solutionë³´ë‹¤ëŠ”
+ *         ì´ë¥¼ Countí•  ìˆ˜ ìˆëŠ” ê¼¼ìˆ˜(?)ë¡œ í’€ë¦¬ëŠ” ê²½ìš°ê°€ ë§ë‹¤.
+ *         ë¬¸ì œ ìì²´ì™€ ê³„ì‚°ì‹ì˜ ìˆœì„œë¥¼ ê³ ë ¤í•´ count íšŸìˆ˜ë§Œ
+ *         ì²´í¬í•˜ëŠ” ë°©ë²•ì„ ì°¾ì•„ë‚´ëŠ” ê²ƒì´ ì¤‘ìš”í•œ ë“¯ í•˜ë‹¤.
+ *         -------ì•„ë˜ëŠ” ì •ë‹µìì˜ solution ì´ë‹¤-------
  */
 
 
 
 import java.util.Scanner;
 
-public class Main {
+public class Main{
 
-	public static void main(String args[]){
-		Scanner scan = new Scanner(System.in);
-		
-		int T = scan.nextInt();
-		int count = 0;
-		
-		int array[] = new int[T];
-		int dp[] = new int[T];
-		
-		for(int i=1; i<=T; i++){
-			array[i] = scan.nextInt();
-		}
-		
-		System.out.println(count);
-		
-	}
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        int n;
+        n = sc.nextInt();
+        int dp[] = new int[n+1];
+
+        System.out.println("-----------dp array log------------");
+        for(int i=2;i<=n;i++){
+            dp[i] = dp[i-1]+1;
+            if(i%2==0 && dp[i]>dp[i/2]+1)
+                dp[i] = dp[i/2]+1;
+            if(i%3==0 && dp[i]>dp[i/3]+1)
+                dp[i] = dp[i/3]+1;
+            System.out.print(dp[i]+" ");
+        }
+        System.out.println();
+        System.out.println();
+
+        System.out.println(dp[n]);
+    }
 }
